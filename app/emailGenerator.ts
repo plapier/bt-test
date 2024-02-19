@@ -6,7 +6,7 @@ function emailGeneratorMessages(name: string): ChatCompletionMessageParam[] {
   return [
     {
       role: "system",
-      content: `Draft a short and unique intro emaila to recipient, ${name}, using 300 characters or less. Please start the email addressing the person's first name. Try to include an emoji or two in the response. Return these emails as a JSON Object with the structure { " ["subject":"string", "body":"body"]}. You must specify how confident you are in the recipient being a celebrity.`,
+      content: `Draft a short and unique intro email to recipient, ${name}, using 300 characters or less. Please start the email addressing the person's first name. Try to include an emoji or two in the response. Return these emails as a JSON Object with the structure { " ["subject":"string", "body":"body"]}.`,
     },
     {
       role: "user",
