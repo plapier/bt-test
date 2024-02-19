@@ -3,23 +3,25 @@ import { Button, Box, Container, Flex, TextFieldInput } from "@radix-ui/themes";
 import { generateEmail } from "./emailGenerator";
 import { useState } from "react";
 import EmailDraft from "./EmailDraft";
+import runEval from "./tutorial.eval";
 
 export default function Home() {
   const [emails, setEmails] = useState({});
   const [recipientName, setRecipientName] = useState("Carl Sagan");
 
-  const captureInput = (event) => {
+  const captureInput = (event: any) => {
     setRecipientName(event.target.value);
     if (event.key == "Enter") {
       fetchData();
     }
   };
   const fetchData = async () => {
-    console.log(`Button clicked!`);
     const generatedEmail = await generateEmail(recipientName);
     setEmails(generatedEmail);
     console.log("Recipient Name: ", recipientName);
     console.log("Generated Email:", generatedEmail);
+
+    await runEval(recipientName, generatedEmail);
     return;
   };
 
@@ -34,7 +36,7 @@ export default function Home() {
             <TextFieldInput
               size="3"
               grow="1"
-              placeholder="Pick a celebrity"
+              placeholder="Enter a celebrity"
               style={{ width: 450 }}
               className="flex"
               onKeyDown={(handleChange) => captureInput(handleChange)}

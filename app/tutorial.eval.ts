@@ -1,26 +1,34 @@
+"use server";
 import { Eval } from "braintrust";
-import { LevenshteinScorer } from "autoevals";
+import { Battle, Humor, LevenshteinScorer } from "autoevals";
+import { generateEmail } from "./emailGenerator";
 
-export default function runEval() {
-  // console.log("Running Eval...");
+ 
+export default async function runEval(name: string, message: object) {
+  // console.log(name);
+  // console.log(message);
+  // console.log(content);
+  // return;
 
-  Eval("Say Hi Bot", {
+  Eval("Phil Test", {
     data: () => {
       return [
         {
-          input: "Foo",
-          expected: "Hi Foo",
+          input: name,
+          expected: message,
         },
         {
-          input: "Bar",
-          expected: "Hello Bar",
+          input: "Taylor Swift",
+          expected: message,
+        },
+        {
+          input: "Bob Dylan",
+          expected: message,
         },
       ]; // Replace with your eval dataset
     },
-    task: (input) => {
-      return "Hi " + input; // Replace with your LLM call
-    },
-    scores: [LevenshteinScorer],
+    task: generateEmail,
+    scores: [LevenshteinScorer, Humor, Battle],
   });
 
 } 

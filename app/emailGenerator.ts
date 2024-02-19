@@ -1,11 +1,12 @@
 import { ChatCompletionMessageParam } from "openai/resources";
 import { client } from "./openai";
+import runEval from "./tutorial.eval";
  
 function emailGeneratorMessages(name: string): ChatCompletionMessageParam[] {
   return [
     {
       role: "system",
-      content: `Draft 3 short and unique intro emails to ${name} using 200 characters or less. The recipient is probably a celebrity. Return these emails as a JSON Object with the structure { "email" = ["subject":"string", "body":"body"]}.`,
+      content: `Draft 3 short and unique intro emails to ${name} using 200 characters or less. The recipient is probably a celebrity. Please start the email addressing the person's first name. Return these emails as a JSON Object with the structure { "email" = ["subject":"string", "body":"body"]}.`,
     },
     {
       role: "user",
@@ -25,9 +26,7 @@ export async function generateEmail(name: string) {
     seed: 123,
   });
 
-  const content = response.choices[0].message.content
-  if (content == "") { return content }
+  const responseContent = JSON.parse(response.choices[0].message.content || "")
 
-  return JSON.parse(content)
-    // return response.choices[0].message.content || "";
+  return responseContent;
 }
