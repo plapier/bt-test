@@ -36,7 +36,7 @@ export default function Home() {
             <TextFieldInput
               size="3"
               grow="1"
-              placeholder="Enter a celebrity"
+              placeholder="Enter a Musician or Celebrity"
               style={{ width: 450 }}
               className="flex"
               onKeyDown={(handleChange) => captureInput(handleChange)}
