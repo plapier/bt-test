@@ -1,6 +1,6 @@
 import { Button, Box, Container, Flex, TextFieldInput } from "@radix-ui/themes";
 
-export default function EmailDraft(props) {
+export default function EmailDraft(props: any) {
   return (
     <Box
       style={{
@@ -11,7 +11,6 @@ export default function EmailDraft(props) {
     >
       <Container grow="1">
         <div className="font-mono">
-          {/* Access each item's properties */}
           <h2 className="font-bold mb-2">{props.subject}</h2>
           <p>{props.body}</p>
         </div>
